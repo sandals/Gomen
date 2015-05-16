@@ -5,7 +5,6 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    @recipe.ingredients.build
   end
 
   def create
@@ -17,13 +16,12 @@ class RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find_by(id: params[:id])
-    @recipe.ingredients.build
-    @recipe.steps.build
+    @recipe.ingredients.build if @recipe.ingredients.count < 1
+    @recipe.steps.build if @recipe.steps.count < 1
   end
 
   def update
     @recipe = Recipe.find_by(id: params[:id])
-    @recipe.ingredients.build
     @recipe.update(update_recipe_params)
 
     redirect_to @recipe
@@ -38,8 +36,8 @@ class RecipesController < ApplicationController
   def update_recipe_params
     params.require(:recipe).permit(
       :title,
-      ingredients_attributes: [:ingredient, :measurement],
-      steps_attributes: [:content]
+      ingredients_attributes: [:id, :ingredient, :measurement],
+      steps_attributes: [:id, :content]
     ) 
   end
 end
