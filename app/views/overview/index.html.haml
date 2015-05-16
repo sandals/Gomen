@@ -1,0 +1,5 @@
+= link_to 'Add Recipe', new_recipe_path
+%hr
+- @recipes.each do |recipe|
+  = link_to recipe.title, edit_recipe_path(recipe)
+  %br

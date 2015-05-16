@@ -1,0 +1,9 @@
+%h1= @recipe.title
+%h2 Ingredients
+%ol
+  - @recipe.ingredients.each do |ingredient|
+    %li= "#{ingredient.measurement} #{ingredient.ingredient}"
+%h2 Steps
+%ol
+  - @recipe.steps.each do |step|
+    %li= step.content

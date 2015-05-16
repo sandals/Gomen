@@ -1,0 +1,14 @@
+%h1
+  =@recipe.title
+  %small= @recipe.status
+
+= simple_form_for @recipe do |f|
+  = f.input :title
+  %h2 Ingredients
+  = f.simple_fields_for :ingredients do |i_form|
+    = i_form.input :ingredient
+    = i_form.input :measurement 
+  %h2 Steps
+  = f.simple_fields_for :steps do |s_form|
+    = s_form.input :content, label: '1'
+  = f.submit 'Save Recipe'
